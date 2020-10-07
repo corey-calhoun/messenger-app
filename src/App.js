@@ -5,7 +5,10 @@ import Message from './components/Message'
 
 function App() {
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([
+    {username: 'Corey', text: 'Hey man!'},
+    {username: 'Sarah', text: 'Hey how are you doing!'}
+  ]);
   const [username, setUsername] = useState('');
 
   //  useState = variable in REACT
@@ -21,7 +24,7 @@ function App() {
   const sendMessage = (event) => {
     event.preventDefault(); // prevents page from auto refreshing due to input and button being in a form element
     // Logic to send message goes here
-    setMessages([...messages, input]); // spreads out current array of messages and pushes input to the message array
+    setMessages([...messages, {username: username, text: input}]); // spreads out current array of messages and pushes input to the message array
     setInput(''); //clears input field
   }
 
@@ -48,7 +51,7 @@ function App() {
 
       {
         messages.map(message => ( // maps each message in the array and returns the individual messages
-          <Message text={message} />
+          <Message username={message.username} text={message.text} />
         ))
       }
     </div>
