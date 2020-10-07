@@ -2,17 +2,24 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import {Button, Input, FormControl, InputLabel} from '@material-ui/core'
 import Message from './components/Message'
+import firebase from 'firebase'
+import db from './firebase'
 
 function App() {
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([
-    {username: 'Corey', text: 'Hey man!'},
-    {username: 'Sarah', text: 'Hey how are you doing!'}
-  ]);
+  const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState('');
 
   //  useState = variable in REACT
-  //  useEffect = run code on a condition in REACT
+  //  useEffect = run code on a condition in REACT and only runs when page loads
+
+  useEffect(() => {
+    db.collection('messages')
+    .orderBy('timestamp', 'desc')
+    .onSnapshot(snapshot => {
+      setMessages(snapshot.docs.map(doc => doc.data())) // realtime listener that displays message
+    })
+  }, []) // condition
 
   useEffect(() => {
     // run code here...
@@ -23,7 +30,11 @@ function App() {
 
   const sendMessage = (event) => {
     event.preventDefault(); // prevents page from auto refreshing due to input and button being in a form element
-    setMessages([...messages, {username: username, text: input}]); // spreads out current array of messages and pushes input to the message array
+    db.collection('messages').add({
+      message: input,
+      username: username,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    })
     setInput(''); //clears input field
   }
 

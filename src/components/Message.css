@@ -11,9 +11,9 @@
 }
 
 .message-userCard {
-    background-color: blue !important;
+    background-color: lightblue !important;
 }
 
 .message-guestCard {
-    background-color: lightcoral !important;
+    background-color: lightgray !important;
 }

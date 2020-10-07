@@ -1,9 +1,8 @@
 import { Card, CardContent, Typography } from '@material-ui/core'
-import React from 'react'
+import React, { forwardRef } from 'react'
 import './Message.css'
 
-function Message(message, username) {
-    // eslint-disable-next-line no-unused-vars
+const Message = forwardRef(({message, username}, ref) => {
     const isUser = username === message.username;
 
     return (
@@ -15,13 +14,13 @@ function Message(message, username) {
                      variant="h5"
                      component="h2"
                     >
-                     {message.username}: {message.text}   
+                     {message.username}: {message.message}   
                     </Typography>
                 </CardContent>
             </Card>    
         </div>
             
     )
-}
+})
 
 export default Message
