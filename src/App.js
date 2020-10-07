@@ -23,7 +23,6 @@ function App() {
 
   const sendMessage = (event) => {
     event.preventDefault(); // prevents page from auto refreshing due to input and button being in a form element
-    // Logic to send message goes here
     setMessages([...messages, {username: username, text: input}]); // spreads out current array of messages and pushes input to the message array
     setInput(''); //clears input field
   }
@@ -51,7 +50,7 @@ function App() {
 
       {
         messages.map(message => ( // maps each message in the array and returns the individual messages
-          <Message username={message.username} text={message.text} />
+          <Message username={username} message={message} />
         ))
       }
     </div>
