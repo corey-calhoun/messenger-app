@@ -4,6 +4,7 @@ import {Button, Input, FormControl, InputLabel} from '@material-ui/core'
 import Message from './components/Message'
 import firebase from 'firebase'
 import db from './firebase'
+import FlipMove from 'react-flip-move'
 
 function App() {
   const [input, setInput] = useState('');
@@ -17,8 +18,8 @@ function App() {
     db.collection('messages')
     .orderBy('timestamp', 'desc')
     .onSnapshot(snapshot => {
-      setMessages(snapshot.docs.map(doc => doc.data())) // realtime listener that displays message
-    })
+      setMessages(snapshot.docs.map(doc => ({id: doc.id, message: doc.data()}))) // realtime listener that displays message
+    });
   }, []) // condition
 
   useEffect(() => {
@@ -59,11 +60,14 @@ function App() {
         </FormControl>
       </form>
 
-      {
-        messages.map(message => ( // maps each message in the array and returns the individual messages
-          <Message username={username} message={message} />
+      <FlipMove>
+        {
+        messages.map(({id, message}) => ( // maps each message in the array and returns the individual messages
+          <Message key={id} username={username} message={message} />
         ))
       }
+      </FlipMove>
+      
     </div>
   );
 }
