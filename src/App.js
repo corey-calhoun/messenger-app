@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import {Button, Input, FormControl, InputLabel} from '@material-ui/core'
+import { IconButton,Input, FormControl, InputLabel} from '@material-ui/core'
+import SendIcon from '@material-ui/icons/Send'
 import Message from './components/Message'
 import firebase from 'firebase'
 import db from './firebase'
@@ -47,16 +48,17 @@ function App() {
       <form className="app-form">
         <FormControl>
           <InputLabel>Enter a message...</InputLabel>
-          <Input value={input} onChange={event => setInput(event.target.value)} />
-          <Button 
-           disabled={!input && !username}
+          <Input placeholder="Enter a message..." value={input} onChange={event => setInput(event.target.value)} />
+          <IconButton 
+           disabled={!input || !username}
            type="submit"  
            onClick={sendMessage}
            variant='contained'
            color='secondary'
+           
           >
-          Send Message
-          </Button>
+           <SendIcon /> 
+          </IconButton>
         </FormControl>
       </form>
 
