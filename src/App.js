@@ -44,12 +44,12 @@ function App() {
       <h1>Messenger App</h1>
       <h2>Welcome {username}</h2>
 
-      <form>
+      <form className="app-form">
         <FormControl>
           <InputLabel>Enter a message...</InputLabel>
           <Input value={input} onChange={event => setInput(event.target.value)} />
           <Button 
-           disabled={!input}
+           disabled={!input && !username}
            type="submit"  
            onClick={sendMessage}
            variant='contained'
@@ -63,7 +63,7 @@ function App() {
       <FlipMove>
         {
         messages.map(({id, message}) => ( // maps each message in the array and returns the individual messages
-          <Message key={id} username={username} message={message} />
+          <Message key={id} username={username} message={message} /> 
         ))
       }
       </FlipMove>

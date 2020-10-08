@@ -1,3 +1,15 @@
 .app {
   text-align: center;
 }
+
+.app-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 20px;
+  z-index: 1;
+  background-color: lightseagreen;
+  width: 100%;
+  justify-content: center;
+}
