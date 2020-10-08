@@ -15,3 +15,17 @@
   border-radius: 5px;
   margin-left: 15%;
 }
+
+.app-formControl {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.app-input {
+  flex: 1 !important;
+}
+
+.app-icon-button {
+  flex: 0 !important;
+}
+
